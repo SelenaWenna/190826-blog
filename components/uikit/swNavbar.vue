@@ -3,7 +3,7 @@ v-toolbar(dense)
   v-toolbar-items
     v-btn.sw-navbar__link(
       v-for="item in items"
-      :key="key"
+      :key="item.title"
       :color="item.color"
       dark
       ) {{ item.title }}
@@ -20,7 +20,7 @@ export default {
       },
       {
         title: 'Cinema',
-        color: 'light-green',
+        color: 'orange',
         url: '/'
       },
       {
@@ -35,7 +35,7 @@ export default {
       },
       {
         title: 'Contact us',
-        color: 'orange',
+        color: 'light-green',
         url: '/'
       }
     ]
@@ -49,7 +49,7 @@ export default {
     padding-right: 0;
     padding-left: 0;
   }
-  .v-toolbar-items {
+  .v-toolbar__items {
     width: 100%;
   }
 }

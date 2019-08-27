@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app
+  v-app.sw-app
     //- v-navigation-drawer(
       v-model="drawer"
       clipped
@@ -36,10 +36,9 @@
         v-content
           v-container
             nuxt
-        v-footer(
+        v-footer.justify-center(
           app
-        )
-          span &copy; 2019 Made by Selena Wenna
+        ) &copy; 2019 Made by Selena Wenna
 </template>
 
 <script>
@@ -78,6 +77,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sw-app {
+  background-color: #f5f5f5;
+}
 .sw-content {
   margin-top: 100px;
 }
