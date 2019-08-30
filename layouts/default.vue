@@ -19,7 +19,7 @@
           v-list-item-content
             v-list-item-title(v-text="item.title")
     v-container.sw-content
-      v-card
+      v-card.mb-12
         v-app-bar
           v-toolbar-title.sw-logo__spacer
             img.sw-logo(src="/img/logo.png" alt="MagBlog")

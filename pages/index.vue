@@ -7,7 +7,8 @@ div
 </template>
 
 <script>
-import swSwiper from '@/components/uikit/swSwiper'
+// Components
+import swSwiper from '@/components/uikit/swTopSwiper'
 import swPosts from '@/components/uikit/swPosts'
 import swAside from '@/components/uikit/swAside'
 
@@ -22,7 +23,6 @@ export default {
 
 <style scoped>
 .sw-main {
-  position: absolute;
-  background: lightsalmon;
+  position: relative;
 }
 </style>

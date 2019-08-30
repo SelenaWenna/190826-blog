@@ -1,71 +1,42 @@
 <template lang="pug">
 div
-  .sw-title.headline.light-blue--text Top stories
-  v-carousel.mt-3(
-    cycle
-    height="500"
-    interval="3000"
+  v-carousel(
+    v-model="currentSlide"
     hide-delimiters
-    )
+    :show-arrows="false"
+  )
     v-carousel-item(
-      v-for="item in items"
-      :key="item"
+      v-for="n in 5"
+      :key="n"
+      :src="`/img/${category}/${n}.jpg`"
     )
-      v-sheet(
-        height="400"
-        :color="item.color"
+  v-slide-group(
+    v-model="currentSlide"
+    :show-arrows="true"
+    )
+    v-slide-item.mx-1.mt-2.mb-2(
+      v-for="n in 5"
+      :key="n"
+      v-slot:default="{ active, toggle }"
+      )
+      v-img(
+        :src="`/img/${category}/${n}.jpg`"
+        height="100"
+        width="200"
+        @click="currentSlide = n - 1"
         )
-        //- .sw-title.pa-4 {{ item.category }}
-        v-img(
-          :src="`/img/swSwiper/${item.img}`"
-          :alt="item.category"
-          max-height="352"
-          )
-        .sw-title.pa-3 {{ item.category }}
-      v-card-text(light color="white") {{ item.text }}
 </template>
 
 <script>
 export default {
+  props: {
+    category: {
+      type: String,
+      default: ''
+    }
+  },
   data: () => ({
-    items: [
-      {
-        img: 'slide01.jpg',
-        category: 'Cinema',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        color: 'light-blue'
-      },
-      {
-        img: 'slide03.jpg',
-        category: 'Travel',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        color: 'pink'
-      },
-      {
-        img: 'slide02.jpg',
-        category: 'Television',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        color: 'orange'
-      },
-      {
-        img: 'slide04.jpg',
-        category: 'Fashion',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        color: 'light-green'
-      },
-      {
-        img: 'slide05.jpg',
-        category: 'Travel',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        color: 'yellow'
-      }
-    ]
+    currentSlide: null
   })
 }
 </script>
-
-<style scoped>
-.sw-title {
-  text-transform: uppercase;
-}
-</style>
