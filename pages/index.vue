@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  sw-swiper
+  sw-top-stories
   .sw-main
     sw-aside
     sw-posts
@@ -8,13 +8,13 @@ div
 
 <script>
 // Components
-import swSwiper from '@/components/uikit/swTopSwiper'
+import swTopStories from '@/components/swTopStories'
 import swPosts from '@/components/uikit/swPosts'
 import swAside from '@/components/uikit/swAside'
 
 export default {
   components: {
-    swSwiper,
+    swTopStories,
     swPosts,
     swAside
   }

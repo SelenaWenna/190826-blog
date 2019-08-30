@@ -5,6 +5,8 @@ v-toolbar(dense)
       v-for="item in items"
       :key="item.title"
       :color="item.color"
+      :to="item.url"
+      nuxt
       dark
       ) {{ item.title }}
 </template>
@@ -19,24 +21,19 @@ export default {
         url: '/'
       },
       {
-        title: 'Cinema',
+        title: 'Top',
         color: 'orange',
-        url: '/'
-      },
-      {
-        title: 'Magazine',
-        color: 'red',
-        url: '/'
+        url: '/top'
       },
       {
         title: 'Archives',
-        color: 'indigo',
-        url: '/'
+        color: 'red',
+        url: '/archives'
       },
       {
         title: 'Contact us',
         color: 'light-green',
-        url: '/'
+        url: '/contact-us'
       }
     ]
   })

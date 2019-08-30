@@ -12,8 +12,6 @@ export const getters = {
 
 export const mutations = {
   setPosts (state, [ posts, comments ]) {
-    console.log(posts); // eslint-disable-line
-
     state.posts = posts.data
     const max = categories.length
 
@@ -29,7 +27,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async setPosts ({ commit }) {
+  async fetchPosts ({ commit }) {
     const resp = await Promise.all([
       this.$axios.get('https://jsonplaceholder.typicode.com/posts'),
       this.$axios.get('https://jsonplaceholder.typicode.com/comments')

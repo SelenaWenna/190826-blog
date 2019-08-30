@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import swSwiper from '@/components/uikit/swSwiper'
 
 export default {
@@ -44,11 +44,7 @@ export default {
       return this.getPosts({ max: 3 })
     }
   },
-  created () {
-    this.setPosts()
-  },
   methods: {
-    ...mapActions(['setPosts']),
     formatCategory (post) {
       return Object.keys(post).length && post.category[0].toUpperCase() + post.category.slice(1)
     },

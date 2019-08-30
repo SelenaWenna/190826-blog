@@ -14,7 +14,7 @@ div
     v-model="currentSlide"
     :show-arrows="true"
     )
-    v-slide-item.mx-1.mt-2.mb-2(
+    v-slide-item.sw-slide.mx-1.mt-2.mb-2(
       v-for="n in 5"
       :key="n"
       v-slot:default="{ active, toggle }"
@@ -40,3 +40,9 @@ export default {
   })
 }
 </script>
+
+<style scoped>
+.sw-slide {
+  cursor: pointer;
+}
+</style>

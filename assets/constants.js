@@ -4,9 +4,21 @@ export const categories = [
   'cats',
   'food',
   'fashion',
-  // 'people',
   'nature',
   'sports',
-  'technics'
-  // 'transport'
+  'technics',
+  'transport'
+]
+
+export const colors = [
+  'light-blue',
+  'orange',
+  'red',
+  'light-green',
+  'indigo',
+  'pink',
+  'blue-grey',
+  'deep-purple',
+  'orange',
+  'green'
 ]

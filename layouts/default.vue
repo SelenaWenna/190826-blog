@@ -1,29 +1,10 @@
 <template lang="pug">
   v-app.sw-app
-    //- v-navigation-drawer(
-      v-model="drawer"
-      clipped
-      fixed
-      app
-      )
-      v-list
-        v-list-item(
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        )
-          v-list-item-action
-            v-icon {{ item.icon }}
-          v-list-item-content
-            v-list-item-title(v-text="item.title")
     v-container.sw-content
       v-card.mb-12
         v-app-bar
           v-toolbar-title.sw-logo__spacer
             img.sw-logo(src="/img/logo.png" alt="MagBlog")
-          //- v-toolbar-nav-icon(@click.stop="drawer = !drawer")
           v-text-field(
             color="light-blue"
             hide-details
@@ -42,6 +23,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import swSocial from '@/components/uikit/swSocial'
 import swNavbar from '@/components/uikit/swNavbar'
 
@@ -50,28 +33,11 @@ export default {
     swSocial,
     swNavbar
   },
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
-    }
+  created () {
+    this.fetchPosts()
+  },
+  methods: {
+    ...mapActions(['fetchPosts'])
   }
 }
 </script>
