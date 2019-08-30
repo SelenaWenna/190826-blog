@@ -5,8 +5,8 @@
     :key="post.id"
   )
     .sw-date.white--text
-      .sw-date__number.orange.headline.pa-2 28
-      .sw-date__month.light-blue.pa-1 feb
+      .sw-date__number.orange.headline.pa-2 {{ formatDay(post.date) }}
+      .sw-date__month.light-blue.pa-1 {{ formatMonth(post.date)}}
     v-card-title {{ post.title }}
     v-card-text.pb-0
       p {{ post.body }}
@@ -15,7 +15,7 @@
     v-card-text
       v-layout.align-center(wrap)
         v-flex.sw-additions
-          span.text-no-wrap.mr-12 Category: {{ category(post) }}
+          span.text-no-wrap.mr-12 Category: {{ formatCategory(post) }}
           span.text-no-wrap
             v-icon.mr-1(small) mdi-comment-multiple-outline
             span {{ post.comments.length }} Comments
@@ -49,8 +49,17 @@ export default {
   },
   methods: {
     ...mapActions(['setPosts']),
-    category (post) {
+    formatCategory (post) {
       return Object.keys(post).length && post.category[0].toUpperCase() + post.category.slice(1)
+    },
+    formatDay (date) {
+      return date.getDate()
+    },
+    formatMonth (date) {
+      const options = {
+        month: 'long'
+      }
+      return date.toLocaleString('en', options).slice(0, 3)
     }
   }
 }

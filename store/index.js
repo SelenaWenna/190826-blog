@@ -21,6 +21,7 @@ export const mutations = {
       const rand = Math.random() * max
       const categoryIndex = Math.floor(rand)
 
+      state.posts[i].date = new Date()
       state.posts[i].category = categories[categoryIndex]
       state.posts[i].comments = comments.data.slice(0, 10)
     }
