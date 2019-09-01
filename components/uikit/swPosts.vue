@@ -11,7 +11,7 @@
     v-card-text.pb-0
       p {{ post.body }}
     v-card-text.pt-0.pb-0
-      sw-swiper(:category="post.category")
+      sw-swiper(:images="post.images")
     v-card-text
       v-layout.align-center(wrap)
         v-flex.sw-additions
@@ -27,11 +27,12 @@
             nuxt
             :to="`/posts/${post.id}`"
             ) Read more
-            v-icon.ml-2(small) mdi-arrow-right
+            v-icon.ml-2(small) mdi-chevron-double-right
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { upperFirst } from '@/utils/stringUtils'
 import swSwiper from '@/components/uikit/swSwiper'
 
 export default {
@@ -46,7 +47,7 @@ export default {
   },
   methods: {
     formatCategory (post) {
-      return Object.keys(post).length && post.category[0].toUpperCase() + post.category.slice(1)
+      return Object.keys(post).length && upperFirst(post.category)
     },
     formatDay (date) {
       return date.getDate()
@@ -67,7 +68,7 @@ export default {
   flex-wrap: wrap;
 }
 .sw-posts {
-  margin-right: 270px;
+  margin-right: 333px;
   &__item {
     position: relative;
   }

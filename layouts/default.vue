@@ -1,5 +1,21 @@
 <template lang="pug">
   v-app.sw-app
+    v-snackbar(
+      v-model="snackbar"
+      color="light-blue"
+      dark
+      multi-line
+      top
+      :timeout="5000"
+      )
+      v-layout
+        v-flex
+          div Sorry, the page is in development.
+          div I'm glad to see you here! :)
+        v-btn(
+          text
+          @click="snackbar = false"
+          ) Close
     v-container.sw-content
       v-card.mb-12
         v-app-bar
@@ -33,6 +49,9 @@ export default {
     swSocial,
     swNavbar
   },
+  data: () => ({
+    snackbar: true
+  }),
   created () {
     this.fetchPosts()
   },

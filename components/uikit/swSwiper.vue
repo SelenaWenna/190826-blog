@@ -6,33 +6,33 @@ div
     :show-arrows="false"
   )
     v-carousel-item(
-      v-for="n in 5"
-      :key="n"
-      :src="`/img/${category}/${n}.jpg`"
+      v-for="(image, n) in images"
+      :key="image"
+      :src="image"
     )
   v-slide-group(
     v-model="currentSlide"
     :show-arrows="true"
     )
     v-slide-item.sw-slide.mx-1.mt-2.mb-2(
-      v-for="n in 5"
-      :key="n"
+      v-for="(image, n) in images"
+      :key="image"
       v-slot:default="{ active, toggle }"
       )
       v-img(
-        :src="`/img/${category}/${n}.jpg`"
+        :src="image"
         height="100"
         width="200"
-        @click="currentSlide = n - 1"
+        @click="currentSlide = n"
         )
 </template>
 
 <script>
 export default {
   props: {
-    category: {
-      type: String,
-      default: ''
+    images: {
+      type: Array,
+      default: () => []
     }
   },
   data: () => ({

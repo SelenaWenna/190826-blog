@@ -1,4 +1,5 @@
-import { categories } from '@/assets/constants'
+import { categories } from '@/utils/constants'
+import { upperFirst } from '@/utils/stringUtils'
 
 export const state = () => ({
   posts: []
@@ -17,11 +18,15 @@ export const mutations = {
 
     for (let i = 0; i < state.posts.length; i++) {
       const rand = Math.random() * max
-      const categoryIndex = Math.floor(rand)
+      const category = categories[Math.floor(rand)]
+      const imageNumbers = [1, 2, 3, 4, 5]
 
       state.posts[i].date = new Date()
-      state.posts[i].category = categories[categoryIndex]
+      state.posts[i].category = category
+      state.posts[i].title = upperFirst(state.posts[i].title)
+      state.posts[i].body = upperFirst(state.posts[i].body)
       state.posts[i].comments = comments.data.slice(0, 10)
+      state.posts[i].images = imageNumbers.map(n => `/img/${category}/${n}.jpg`)
     }
   }
 }

@@ -2,7 +2,7 @@
 div
   .sw-title.headline.light-blue--text Top stories
   v-slide-group(
-    :show-arrows="true"
+    show-arrows
     )
     template(v-slot:prev)
       v-btn(
@@ -43,7 +43,7 @@ div
 
 <script>
 import { mapGetters } from 'vuex'
-import { colors } from '@/assets/constants'
+import { colors } from '@/utils/constants'
 
 export default {
   computed: {
