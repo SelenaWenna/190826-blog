@@ -8,9 +8,9 @@ div
 
 <script>
 // Components
-import swTopStories from '@/components/swTopStories'
-import swPosts from '@/components/uikit/swPosts'
-import swAside from '@/components/uikit/swAside'
+import swTopStories from '@/components/sw-top-stories.vue'
+import swPosts from '@/components/sw-posts.vue'
+import swAside from '@/components/sw-aside.vue'
 
 export default {
   components: {

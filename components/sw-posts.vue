@@ -15,8 +15,8 @@
     v-card-text
       v-layout.align-center(wrap)
         v-flex.sw-additions
-          span.text-no-wrap.mr-12 Category: {{ formatCategory(post) }}
-          span.text-no-wrap
+          v-flex.text-no-wrap(xs12 md6) Category: {{ formatCategory(post) }}
+          v-flex.text-no-wrap(xs12 md6)
             v-icon.mr-1(small) mdi-comment-multiple-outline
             span {{ post.comments.length }} Comments
         v-flex.text-right
@@ -32,8 +32,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { upperFirst } from '@/utils/stringUtils'
-import swSwiper from '@/components/uikit/swSwiper'
+import { upperFirst } from '@/utils/sw-string.js'
+import swSwiper from '@/components/sw-swiper.vue'
 
 export default {
   components: {

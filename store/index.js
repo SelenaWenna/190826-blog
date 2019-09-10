@@ -1,5 +1,5 @@
-import { categories } from '@/utils/constants'
-import { upperFirst } from '@/utils/stringUtils'
+import { categories } from '@/utils/sw-constants.js'
+import { upperFirst } from '@/utils/sw-string.js'
 
 export const state = () => ({
   posts: []
@@ -38,5 +38,7 @@ export const actions = {
       this.$axios.get('https://jsonplaceholder.typicode.com/comments')
     ])
     commit('setPosts', resp)
+
+    return resp
   }
 }

@@ -1,5 +1,11 @@
 <template lang="pug">
-  v-app.sw-app
+v-app.sw-app
+  the-loading(
+    :loading="loading"
+    )
+  div(
+    v-if="!loading"
+    )
     v-snackbar(
       v-model="snackbar"
       color="light-blue"
@@ -10,7 +16,7 @@
       )
       v-layout
         v-flex
-          div Sorry, the page is in development.
+          div The page is in development.
           div I'm glad to see you here! :)
         v-btn(
           text
@@ -41,19 +47,23 @@
 <script>
 import { mapActions } from 'vuex'
 
-import swSocial from '@/components/uikit/swSocial'
-import swNavbar from '@/components/uikit/swNavbar'
+import TheLoading from '@/components/uikit/the-loading.vue'
+import swSocial from '@/components/uikit/sw-social.vue'
+import swNavbar from '@/components/uikit/sw-navbar.vue'
 
 export default {
   components: {
+    TheLoading,
     swSocial,
     swNavbar
   },
   data: () => ({
+    loading: true,
     snackbar: true
   }),
-  created () {
-    this.fetchPosts()
+  async created () {
+    await this.fetchPosts()
+    this.loading = false
   },
   methods: {
     ...mapActions(['fetchPosts'])

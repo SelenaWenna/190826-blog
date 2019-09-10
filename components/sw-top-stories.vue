@@ -43,7 +43,7 @@ div
 
 <script>
 import { mapGetters } from 'vuex'
-import { colors } from '@/utils/constants'
+import { colors } from '@/utils/sw-constants.js'
 
 export default {
   computed: {
