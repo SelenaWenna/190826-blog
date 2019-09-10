@@ -1,20 +1,24 @@
 <template lang="pug">
 .sw-aside
-  sw-likes
-  sw-archives
-  sw-tag-cloud
+  sw-likes.sw-aside__item
+  sw-archives.sw-aside__item(
+    v-if="$route.path !== '/archives'"
+    )
+  sw-top.sw-aside__item(
+    v-else
+    )
 </template>
 
 <script>
 import swLikes from '@/components/sw-likes.vue'
-import swArchives from '@/components/sw-archives.vue'
-import swTagCloud from '@/components/sw-tag-cloud.vue'
+const swArchives = () => import('@/components/sw-archives.vue')
+const swTop = () => import('@/components/sw-top.vue')
 
 export default {
   components: {
     swLikes,
     swArchives,
-    swTagCloud
+    swTop
   }
 }
 </script>
@@ -24,6 +28,9 @@ export default {
   position: absolute;
   right: 0;
   width: 320px;
+  &__item {
+    position: relative;
+  }
   &__img {
     width: 80px;
     min-width: 80px;
