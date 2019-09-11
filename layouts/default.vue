@@ -26,7 +26,10 @@ v-app.sw-app
             @click="snackbar = false"
             ) Close
       v-container.sw-content
-        v-card.mb-12
+        img.sw-border.sw-border_left(
+          src="/img/border-left.png"
+          )
+        v-card.pb-12
           v-app-bar
             v-toolbar-title.sw-logo__spacer
               img.sw-logo(src="/img/logo.png" alt="MagBlog")
@@ -42,9 +45,15 @@ v-app.sw-app
           v-content
             v-container
               nuxt
-          v-footer.justify-center(
-            app
-          ) &copy; 2019 Made by Selena Wenna
+
+          img.sw-border.sw-border_top(
+            src="/img/border-right.png"
+            )
+          img.sw-border.sw-border_bottom(
+            src="/img/border-right.png"
+            )
+      v-footer.justify-center(
+      ) &copy; 2019 Made by Selena Wenna
 </template>
 
 <script>
@@ -95,6 +104,7 @@ export default {
 }
 .sw-content {
   margin-top: 100px;
+  position: relative;
 }
 .sw-logo {
   position: absolute;
@@ -102,6 +112,21 @@ export default {
   left: 0;
   &__spacer {
     padding-left: 180px;
+  }
+}
+.sw-border {
+  position: absolute;
+  &_left {
+    left: -400px;
+    top: -185px;
+  }
+  &_top {
+    right: -14px;
+    top: 6%;
+  }
+  &_bottom {
+    right: -14px;
+    bottom: 5px;
   }
 }
 </style>
