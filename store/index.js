@@ -7,7 +7,16 @@ export const state = () => ({
 
 export const getters = {
   getPosts: state => ({ min = 0, max }) => {
-    return state.posts.slice(min, max)
+    if (max) {
+      return state.posts.slice(min, max)
+    }
+    return state.posts.slice(min)
+  },
+  getPost: state => ({ id }) => {
+    if (id) {
+      return state.posts.find(post => post.id === id) || {}
+    }
+    return {}
   }
 }
 
@@ -25,7 +34,13 @@ export const mutations = {
       state.posts[i].category = category
       state.posts[i].title = upperFirst(state.posts[i].title)
       state.posts[i].body = upperFirst(state.posts[i].body)
-      state.posts[i].comments = comments.data.slice(0, 10)
+      state.posts[i].comments = comments.data
+        .filter(comment => state.posts[i].id === comment.postId)
+        .map((comment) => {
+          comment.name = upperFirst(comment.name)
+          comment.body = upperFirst(comment.body)
+          return comment
+        })
       state.posts[i].images = imageNumbers.map(n => `/img/${category}/${n}.jpg`)
     }
   }

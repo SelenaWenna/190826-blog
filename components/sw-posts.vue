@@ -68,7 +68,6 @@ export default {
   flex-wrap: wrap;
 }
 .sw-posts {
-  margin-right: 333px;
   &__item {
     position: relative;
   }

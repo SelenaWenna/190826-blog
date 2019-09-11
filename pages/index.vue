@@ -3,7 +3,8 @@ div
   sw-top-stories
   .sw-main
     sw-aside
-    sw-posts
+    .sw-main__content
+      sw-posts
 </template>
 
 <script>

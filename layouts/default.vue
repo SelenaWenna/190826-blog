@@ -29,7 +29,7 @@ v-app.sw-app
         img.sw-border.sw-border_left(
           src="/img/border-left.png"
           )
-        v-card.pb-12
+        v-card.sw-content__card.mb-12
           v-app-bar
             v-toolbar-title.sw-logo__spacer
               img.sw-logo(src="/img/logo.png" alt="MagBlog")
@@ -53,7 +53,8 @@ v-app.sw-app
             src="/img/border-right.png"
             )
       v-footer.justify-center(
-      ) &copy; 2019 Made by Selena Wenna
+        app
+        ) &copy; 2019 Made by Selena Wenna
 </template>
 
 <script>
@@ -84,6 +85,9 @@ export default {
 </script>
 
 <style lang="scss">
+.sw-main__content {
+  margin-right: 333px;
+}
 .sw-title {
   text-transform: uppercase;
 }
@@ -105,6 +109,9 @@ export default {
 .sw-content {
   margin-top: 100px;
   position: relative;
+  &__card {
+    min-height: 700px;
+  }
 }
 .sw-logo {
   position: absolute;
@@ -122,7 +129,8 @@ export default {
   }
   &_top {
     right: -14px;
-    top: 6%;
+    top: 200px;
+    z-index: 2;
   }
   &_bottom {
     right: -14px;
