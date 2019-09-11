@@ -4,7 +4,6 @@ div
   v-form(
     ref="form"
     v-model="valid"
-    :lazy-validation="lazy"
     )
     v-text-field(
       v-model="name"
@@ -30,16 +29,31 @@ div
       )
     v-checkbox.mt-0(
       v-model="checkbox"
+      color="success"
       :rules="[v => !!v || 'You must agree to continue!']"
-      label="Do you agree?"
+      label="I agree to the processing of personal data"
       required
       )
 
     v-btn.mr-4(
       :disabled="!valid"
       color="success"
-      @click="validate"
+      @click="tryToSendForm"
       ) Send
+  v-snackbar(
+    v-model="snackbar"
+    color="success"
+    dark
+    top
+    :timeout="5000"
+    )
+    v-layout.align-center
+      v-flex
+        div The message sent.
+      v-btn(
+        text
+        @click="snackbar = false"
+        ) Close
 </template>
 
 <script>
@@ -60,20 +74,26 @@ export default {
     messageRules: [
       v => !!v || 'Message is required'
     ],
-    checkbox: false
+    checkbox: false,
+    snackbar: false
   }),
 
   methods: {
-    validate () {
+    tryToSendForm () {
+      // This functionality works in demo!
+
+      // TODO:
+      // 1. Validate form with plugin (VeeValidate or Vuelidate)
+      // 2. Send POST http-query with axios
+      // 3. Then output snackbar in success or error status (in depending on server response)
+      // 4. Redirect or clear form
       if (this.$refs.form.validate()) {
         this.snackbar = true
+        this.resetForm()
       }
     },
-    reset () {
+    resetForm () {
       this.$refs.form.reset()
-    },
-    resetValidation () {
-      this.$refs.form.resetValidation()
     }
   }
 }

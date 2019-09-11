@@ -17,7 +17,7 @@ v-app.sw-app
         top
         :timeout="5000"
         )
-        v-layout
+        v-layout.align-center
           v-flex
             div The page is in development.
             div I'm glad to see you here! :)

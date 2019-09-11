@@ -9,6 +9,7 @@ div
     small
     depressed
     :href="item.url"
+    target="blank"
     )
     v-icon {{ item.icon }}
 </template>
