@@ -18,7 +18,7 @@ v-card.mt-12
           @click=""
         )
           v-list-item-avatar
-            v-img(:src="`http://i.pravatar.cc/${60 + i}`")
+            v-img(:src="getUser({ email: item.email }).avatar")
 
           v-list-item-content
             v-list-item-title(v-html="item.name")
@@ -26,12 +26,19 @@ v-card.mt-12
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     comments: {
       type: Array,
       default: () => ([])
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getUser'
+    ])
   }
 }
 </script>

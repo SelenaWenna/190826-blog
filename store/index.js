@@ -2,7 +2,8 @@ import { categories } from '@/utils/sw-constants.js'
 import { upperFirst } from '@/utils/sw-string.js'
 
 export const state = () => ({
-  posts: []
+  posts: [],
+  users: []
 })
 
 export const getters = {
@@ -17,7 +18,8 @@ export const getters = {
       return state.posts.find(post => post.id === id) || {}
     }
     return {}
-  }
+  },
+  getUser: state => ({ email }) => state.users.find(user => user.email === email) || {}
 }
 
 export const mutations = {
@@ -43,6 +45,18 @@ export const mutations = {
         })
       state.posts[i].images = imageNumbers.map(n => `/img/${category}/${n}.jpg`)
     }
+  },
+  setUsers (state, comments) {
+    for (let i = 0; i < comments.data.length; i++) {
+      if (!state.users.find(user => comments.data[i].email === user.email)) {
+        const userId = state.users.length + 1
+        state.users.push({
+          id: userId,
+          email: comments.data[i].email,
+          avatar: `http://i.pravatar.cc/${60 + userId}`
+        })
+      }
+    }
   }
 }
 
@@ -52,6 +66,7 @@ export const actions = {
       this.$axios.get('https://jsonplaceholder.typicode.com/posts'),
       this.$axios.get('https://jsonplaceholder.typicode.com/comments')
     ])
+    commit('setUsers', resp[1])
     commit('setPosts', resp)
 
     return resp
