@@ -39,7 +39,15 @@ v-card.mt-12
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
+  props: {
+    postId: {
+      type: Number,
+      default: 0
+    }
+  },
   data: () => ({
     valid: true,
     name: '',
@@ -59,6 +67,9 @@ export default {
   }),
 
   methods: {
+    ...mapActions([
+      'addComment'
+    ]),
     tryToSendForm () {
       // This functionality works in demo!
 
@@ -68,6 +79,12 @@ export default {
       // 3. Then output snackbar in success or error status (in depending on server response)
       // 4. Redirect or clear form
       if (this.$refs.form.validate()) {
+        this.addComment({
+          postId: this.postId,
+          name: this.name,
+          email: this.email,
+          body: this.message
+        })
         this.snackbar = true
         this.resetForm()
       }

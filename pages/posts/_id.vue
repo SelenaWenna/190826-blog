@@ -6,7 +6,9 @@ div
       sw-full-post(
         :post="post"
         )
-      sw-comment-form
+      sw-comment-form(
+        :postId="post.id"
+        )
       sw-comments(
         :comments="post.comments"
         )

@@ -15,7 +15,6 @@ v-card.mt-12
           )
         v-list-item(
           :key="item.name"
-          @click=""
         )
           v-list-item-avatar
             v-img(:src="getUser({ email: item.email }).avatar")
