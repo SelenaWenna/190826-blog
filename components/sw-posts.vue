@@ -35,7 +35,7 @@
     color="primary"
     text
     small
-    @click="wip"
+    @click="page++"
     )
     v-icon.ml-2(small) mdi-chevron-double-left
     | Older posts
@@ -50,10 +50,14 @@ export default {
   components: {
     swSwiper
   },
+  data: () => ({
+    perPage: 3,
+    page: 1
+  }),
   computed: {
     ...mapGetters(['getPosts']),
     posts () {
-      return this.getPosts({ max: 3 })
+      return this.getPosts({ max: this.perPage * this.page })
     }
   },
   methods: {
@@ -68,9 +72,6 @@ export default {
         month: 'long'
       }
       return date.toLocaleString('en', options).slice(0, 3)
-    },
-    wip () {
-      alert('Work in progress...')
     }
   }
 }
