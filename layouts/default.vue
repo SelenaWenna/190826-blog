@@ -100,6 +100,10 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+.v-application a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.8);
+}
 </style>
 
 <style lang="scss" scoped>

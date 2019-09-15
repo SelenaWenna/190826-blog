@@ -10,18 +10,18 @@ v-card.mt-12
       v-model="valid"
       )
       v-text-field(
-        v-model="name"
-        :counter="10"
-        :rules="nameRules"
-        label="Name"
-        required
-      )
-      v-text-field(
         v-model="email"
         :rules="emailRules"
         label="E-mail"
         required
         )
+      v-text-field(
+        v-model="name"
+        :counter="50"
+        :rules="nameRules"
+        label="Title"
+        required
+      )
       v-textarea.mt-4(
         v-model="message"
         :rules="messageRules"
@@ -53,7 +53,7 @@ export default {
     name: '',
     nameRules: [
       v => !!v || 'Name is required',
-      v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      v => (v && v.length <= 50) || 'Title must be less than 50 characters'
     ],
     email: '',
     emailRules: [

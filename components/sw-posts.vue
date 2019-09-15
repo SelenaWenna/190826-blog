@@ -7,7 +7,10 @@
     .sw-date.white--text
       .sw-date__number.orange.headline.pa-2 {{ formatDay(post.date) }}
       .sw-date__month.light-blue.pa-1 {{ formatMonth(post.date)}}
-    v-card-title {{ post.title }}
+    v-card-title
+      nuxt-link(
+        :to="`/posts/${post.id}`"
+        ) {{ post.title }}
     v-card-text.pb-0
       p {{ post.body }}
     v-card-text.pt-0.pb-0
@@ -28,6 +31,14 @@
             :to="`/posts/${post.id}`"
             ) Read more
             v-icon.ml-2(small) mdi-chevron-double-right
+  v-btn.ml-0.mt-4(
+    color="primary"
+    text
+    small
+    @click="wip"
+    )
+    v-icon.ml-2(small) mdi-chevron-double-left
+    | Older posts
 </template>
 
 <script>
@@ -57,6 +68,9 @@ export default {
         month: 'long'
       }
       return date.toLocaleString('en', options).slice(0, 3)
+    },
+    wip () {
+      alert('Work in progress...')
     }
   }
 }
