@@ -60,13 +60,36 @@ v-app.sw-app
                       ) {{ item.title }}
               sw-social
             img.sw-logo(src="/img/logo.png" alt="MagBlog")
-            v-text-field(
-              color="light-blue"
-              hide-details
-              append-icon="mdi-magnify"
-              outlined
-              single-line
-              )
+            transition-group.sw-search-group(name="fade" mode="out-in")
+              v-layout.d-sm-none(key="searchBtn")
+                v-spacer
+                v-btn.transparent.sw-search-btn(
+                  v-show="!showSearch"
+                  fab
+                  depressed
+                  small
+                  @click="showSearch = true"
+                )
+                  v-icon.sw-search-btn__icon mdi-magnify
+              v-text-field#sw-search-input.d-sm-block(
+                v-model="searchQuery"
+                v-show="showSearch"
+                key="searchInput"
+                color="light-blue"
+                :class="isAbsoluteSearch ? 'sw-search-input' : ''"
+                hide-details
+                prepend-inner-icon="mdi-magnify"
+                outlined
+                single-line
+                @blur="hideSearchInput"
+                )
+                //- append-icon="mdi-close"
+                template(v-slot:append="")
+                  transition(name="fade")
+                    v-icon(
+                      v-if="isAbsoluteSearch || searchQuery"
+                      @click="searchQuery = ''; showSearch = false"
+                      ) mdi-close
 
           sw-navbar(:items="items")
           v-content
@@ -100,6 +123,8 @@ export default {
   data: () => ({
     loading: true,
     snackbar: true,
+    showSearch: false,
+    searchQuery: '',
     items: [
       {
         title: 'Home',
@@ -123,17 +148,40 @@ export default {
       }
     ]
   }),
+  computed: {
+    isAbsoluteSearch () {
+      return this.$vuetify.breakpoint.xs
+    }
+  },
+  watch: {
+    showSearch (val) {
+      if (val) {
+        this.$nextTick(() => {
+          document.getElementById('sw-search-input').dispatchEvent(new Event('focus'))
+        })
+      }
+    }
+  },
   async created () {
     await this.fetchPosts()
     this.loading = false
   },
   methods: {
-    ...mapActions(['fetchPosts'])
+    ...mapActions(['fetchPosts']),
+    hideSearchInput () {
+      if (!this.searchQuery) {
+        this.showSearch = false
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss">
+.sw-app {
+  min-width: 320px;
+  background-color: #f5f5f5;
+}
 .sw-title {
   text-transform: uppercase;
 }
@@ -156,9 +204,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-.sw-app {
-  background-color: #f5f5f5;
-}
 .sw-content {
   margin-top: 100px;
   position: relative;
@@ -199,5 +244,23 @@ export default {
     right: -14px;
     bottom: 5px;
   }
+}
+.sw-search-group {
+  display: flex;
+  flex: 1 1 auto;
+}
+.sw-search-btn {
+  margin-right: -12px;
+  &__icon {
+    opacity: 0.54;
+  }
+}
+.sw-search-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
 }
 </style>
