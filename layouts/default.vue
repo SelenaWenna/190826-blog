@@ -31,8 +31,35 @@ v-app.sw-app
           )
         v-card.sw-content__card.mb-12
           v-app-bar
-            v-toolbar-title.sw-logo__spacer
-              img.sw-logo(src="/img/logo.png" alt="MagBlog")
+            .sw-logo__spacer
+              v-menu(
+                open-on-hover
+                nudge-right="-16"
+                nudge-top="8"
+                )
+                template(v-slot:activator="{ on }")
+                  v-btn.d-block.d-sm-none(
+                    fab
+                    small
+                    depressed
+                    v-on="on"
+                    )
+                    v-icon mdi-menu
+                v-list.sw-menu.sw-menu_adaptive.pa-0.elevation-10
+                  v-list-item.text-center(
+                    v-for="(item, index) in items"
+                    :key="index"
+                    :class="item.color"
+                    :to="item.url"
+                    dark
+                    @click=""
+                  )
+                    v-list-item-title.sw-navbar__link(
+                      nuxt
+                      block
+                      ) {{ item.title }}
+              sw-social
+            img.sw-logo(src="/img/logo.png" alt="MagBlog")
             v-text-field(
               color="light-blue"
               hide-details
@@ -40,8 +67,8 @@ v-app.sw-app
               outlined
               single-line
               )
-            sw-social
-          sw-navbar
+
+          sw-navbar(:items="items")
           v-content
             v-container
               nuxt
@@ -72,7 +99,29 @@ export default {
   },
   data: () => ({
     loading: true,
-    snackbar: true
+    snackbar: true,
+    items: [
+      {
+        title: 'Home',
+        color: 'light-blue',
+        url: '/'
+      },
+      {
+        title: 'Top',
+        color: 'orange',
+        url: '/top'
+      },
+      {
+        title: 'Archives',
+        color: 'red',
+        url: '/archives'
+      },
+      {
+        title: 'Contact us',
+        color: 'light-green',
+        url: '/contact-us'
+      }
+    ]
   }),
   async created () {
     await this.fetchPosts()
@@ -119,10 +168,20 @@ export default {
 }
 .sw-logo {
   position: absolute;
-  top: -100%;
+  top: -64px;
   left: 0;
   &__spacer {
-    padding-left: 180px;
+    width: 197px;
+    min-width: 197px;
+    text-align: right;
+    padding-right: 25px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+.sw-menu {
+  &_adaptive {
+    width: 188px;
   }
 }
 .sw-border {

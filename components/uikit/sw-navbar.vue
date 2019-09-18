@@ -1,5 +1,5 @@
 <template lang="pug">
-v-toolbar(dense)
+v-toolbar.d-none.d-sm-block(dense)
   v-toolbar-items
     v-btn.sw-navbar__link(
       v-for="item in items"
@@ -13,30 +13,12 @@ v-toolbar(dense)
 
 <script>
 export default {
-  data: () => ({
-    items: [
-      {
-        title: 'Home',
-        color: 'light-blue',
-        url: '/'
-      },
-      {
-        title: 'Top',
-        color: 'orange',
-        url: '/top'
-      },
-      {
-        title: 'Archives',
-        color: 'red',
-        url: '/archives'
-      },
-      {
-        title: 'Contact us',
-        color: 'light-green',
-        url: '/contact-us'
-      }
-    ]
-  })
+  props: {
+    items: {
+      type: Array,
+      default: () => ([])
+    }
+  }
 }
 </script>
 
