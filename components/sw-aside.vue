@@ -25,8 +25,7 @@ export default {
 
 <style lang="scss">
 .sw-aside {
-  position: absolute;
-  right: 0;
+  float: right;
   width: 320px;
   &__item {
     position: relative;

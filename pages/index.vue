@@ -2,8 +2,10 @@
 div
   sw-top-stories
   .sw-main
-    sw-aside
-    .sw-main__content
+    sw-aside.d-none.d-md-block
+    div(
+      :class="isVisibleAside ? 'sw-main__content' : ''"
+      )
       sw-posts
 </template>
 
@@ -18,6 +20,11 @@ export default {
     swTopStories,
     swPosts,
     swAside
+  },
+  computed: {
+    isVisibleAside () {
+      return this.$vuetify.breakpoint.mdAndUp
+    }
   }
 }
 </script>

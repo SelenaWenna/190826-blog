@@ -134,14 +134,14 @@ export default {
 </script>
 
 <style lang="scss">
-.sw-main__content {
-  margin-right: 333px;
-}
 .sw-title {
   text-transform: uppercase;
 }
 .sw-main {
   position: relative;
+  &__content {
+    margin-right: 333px;
+  }
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
