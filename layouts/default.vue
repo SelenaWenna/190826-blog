@@ -25,74 +25,20 @@ v-app.sw-app
             text
             @click="snackbar = false"
             ) Close
-      v-container.sw-content
+      v-container.sw-container
         img.sw-border.sw-border_left(
           src="/img/border-left.png"
           )
-        v-card.sw-content__card.mb-12
+        v-card.sw-container__card.mb-12
           v-app-bar
             .sw-logo__spacer
-              v-menu(
-                open-on-hover
-                nudge-right="-16"
-                nudge-top="8"
-                )
-                template(v-slot:activator="{ on }")
-                  v-btn.d-block.d-sm-none(
-                    fab
-                    small
-                    depressed
-                    v-on="on"
-                    )
-                    v-icon mdi-menu
-                v-list.sw-menu.sw-menu_adaptive.pa-0.elevation-10
-                  v-list-item.text-center(
-                    v-for="(item, index) in items"
-                    :key="index"
-                    :class="item.color"
-                    :to="item.url"
-                    dark
-                    @click=""
-                  )
-                    v-list-item-title.sw-navbar__link(
-                      nuxt
-                      block
-                      ) {{ item.title }}
+              sw-navbar-adaptive(:items="items")
               sw-social
             img.sw-logo(src="/img/logo.png" alt="MagBlog")
-            transition-group.sw-search-group(name="fade" mode="out-in")
-              v-layout.d-sm-none(key="searchBtn")
-                v-spacer
-                v-btn.transparent.sw-search-btn(
-                  v-show="!showSearch"
-                  fab
-                  depressed
-                  small
-                  @click="showSearch = true"
-                )
-                  v-icon.sw-search-btn__icon mdi-magnify
-              v-text-field#sw-search-input.d-sm-block(
-                v-model="searchQuery"
-                v-show="showSearch"
-                key="searchInput"
-                color="light-blue"
-                :class="isAbsoluteSearch ? 'sw-search-input' : ''"
-                hide-details
-                prepend-inner-icon="mdi-magnify"
-                outlined
-                single-line
-                @blur="hideSearchInput"
-                )
-                //- append-icon="mdi-close"
-                template(v-slot:append="")
-                  transition(name="fade")
-                    v-icon(
-                      v-if="isAbsoluteSearch || searchQuery"
-                      @click="searchQuery = ''; showSearch = false"
-                      ) mdi-close
+            sw-search
 
           sw-navbar(:items="items")
-          v-content
+          v-content.sw-content.pa-0
             v-container
               nuxt
 
@@ -113,18 +59,20 @@ import { mapActions } from 'vuex'
 import TheLoading from '@/components/uikit/the-loading.vue'
 import swSocial from '@/components/uikit/sw-social.vue'
 import swNavbar from '@/components/uikit/sw-navbar.vue'
+import swNavbarAdaptive from '@/components/uikit/sw-navbar_adaptive.vue'
+import swSearch from '@/components/uikit/sw-search.vue'
 
 export default {
   components: {
     TheLoading,
     swSocial,
-    swNavbar
+    swNavbar,
+    swNavbarAdaptive,
+    swSearch
   },
   data: () => ({
     loading: true,
     snackbar: true,
-    showSearch: false,
-    searchQuery: '',
     items: [
       {
         title: 'Home',
@@ -148,31 +96,12 @@ export default {
       }
     ]
   }),
-  computed: {
-    isAbsoluteSearch () {
-      return this.$vuetify.breakpoint.xs
-    }
-  },
-  watch: {
-    showSearch (val) {
-      if (val) {
-        this.$nextTick(() => {
-          document.getElementById('sw-search-input').dispatchEvent(new Event('focus'))
-        })
-      }
-    }
-  },
   async created () {
     await this.fetchPosts()
     this.loading = false
   },
   methods: {
-    ...mapActions(['fetchPosts']),
-    hideSearchInput () {
-      if (!this.searchQuery) {
-        this.showSearch = false
-      }
-    }
+    ...mapActions(['fetchPosts'])
   }
 }
 </script>
@@ -204,7 +133,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-.sw-content {
+.sw-container {
   margin-top: 100px;
   position: relative;
   &__card {
@@ -245,22 +174,7 @@ export default {
     bottom: 5px;
   }
 }
-.sw-search-group {
-  display: flex;
-  flex: 1 1 auto;
-}
-.sw-search-btn {
-  margin-right: -12px;
-  &__icon {
-    opacity: 0.54;
-  }
-}
-.sw-search-input {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: white;
+.sw-content {
+  min-height: 100%;
 }
 </style>

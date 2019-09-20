@@ -1,15 +1,15 @@
-<template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
-  </v-app>
+<template lang="pug">
+v-card.sw-error.mx-auto(min-height="676")
+  v-card-title.white--text
+    h1.mx-auto(v-if="error.statusCode === 404") {{ pageNotFound }}
+    h1.mx-auto(v-else) {{ otherError }}
+  v-card-text.text-center
+    v-btn(
+      nuxt
+      to="/"
+      text
+      dark
+      ) Home page
 </template>
 
 <script>
@@ -39,6 +39,15 @@ export default {
 
 <style scoped>
 h1 {
-  font-size: 20px;
+  font-size: 30px;
+}
+.sw-error {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/img/border-left.png);
+  background-position: center;
 }
 </style>
