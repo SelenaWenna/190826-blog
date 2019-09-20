@@ -6,25 +6,7 @@ v-app.sw-app
   transition(
     name="fade"
     )
-    div(
-      v-if="!loading"
-      )
-      v-snackbar(
-        v-model="snackbar"
-        color="light-blue"
-        dark
-        multi-line
-        top
-        :timeout="5000"
-        )
-        v-layout.align-center
-          v-flex
-            div The page is in development.
-            div I'm glad to see you here! :)
-          v-btn(
-            text
-            @click="snackbar = false"
-            ) Close
+    div(v-if="!loading")
       v-container.sw-container
         img.sw-border.sw-border_left(
           src="/img/border-left.png"
